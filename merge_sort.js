@@ -99,7 +99,7 @@ function mergeSort(array){
 
 //or the same trial, said a different way
 
-const inputArray = [1, 2, 3, 4];
+/* const inputArray = [1, 2, 3, 4];
 
 function mergeSort(inputArray) {
 	if (inputArray.length === 1) {
@@ -117,6 +117,29 @@ function mergeSort(inputArray) {
 		console.log(twoHalves); // [ [ 1, 2 ], [ 3, 4 ] ]
 
 		//    call mergeSort(newArrayLeft)
+	}
+}
+
+mergeSort(inputArray);
+ */
+
+// another iteration
+
+const inputArray = [1, 2, 3, 4];
+
+function mergeSort(inputArray) {
+	console.log(inputArray.length, 'inputArray length');
+	if (inputArray.length === 1) {
+		// base case - a single element - return element to merged with nearest neighbor
+		console.log('base case hit');
+		return 1;
+	} else {
+		//      find mipoint of inputArray
+		const midpoint = Math.floor(inputArray.length / 2);
+
+		//      make an array that holds both new arrays and make a recursive call
+
+		mergeSort([inputArray.slice(0, midpoint), inputArray.slice(midpoint)]);
 	}
 }
 
