@@ -27,7 +27,13 @@ level 3     [3 9]  [ 5 7]
 
 
 mergeSort ( low , high) {
-    if
+
+    // base case
+
+    if (array.length = 1) {
+        // ready to merge back up
+
+    }
 
 1    if ( low  <  high ){
         find midpoint
@@ -65,3 +71,57 @@ if
 
 
  */
+
+/*
+
+even more simple trial --- sort 4 elements
+
+
+function mergeSort(array){
+
+    if array.length = 1 {
+        // base case  this is where we start to compare and merge up.. using two way merge?
+    }
+    if array.length >1
+        find midpoint,
+
+        make new array left
+        push left half into array
+            mergeSort(array)
+
+        make new array right
+        push right half into array
+            mergeSort(array)
+
+ }
+
+*/
+
+/*
+
+or the same trial, said a different way
+
+
+function mergeSort(inputArray){
+
+    if inputArray.length === 1 {
+        // base case - return element to merge with a merge algorithm
+    } else {
+
+        find mipoint of inputArray
+        make newArrayLeft
+        push 0 to midpoint to newArrrayLeft
+        call mergeSort(newArrayLeft)
+
+
+
+
+
+    }
+
+
+
+}
+
+
+*/
