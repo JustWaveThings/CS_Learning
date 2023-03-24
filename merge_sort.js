@@ -125,7 +125,7 @@ mergeSort(inputArray);
 
 // another iteration
 
-const inputArray = [1, 2, 3, 4];
+/* const inputArray = [1, 2, 3, 4];
 
 function mergeSort(inputArray) {
 	console.log(inputArray.length, 'inputArray length');
@@ -143,4 +143,37 @@ function mergeSort(inputArray) {
 	}
 }
 
+mergeSort(inputArray);
+ */
+
+// testing midpoint when there is array length 2
+const inputArray = [0, 1, 2, 3, 4, 5, 6, 7];
+
+let counter = 0;
+
+function mergeSort(array) {
+	console.log(array);
+	console.log(array.length, ' - array length');
+	if (array.length === 1) {
+		// base case - a single element - return element to merge sorted with nearest neighbor
+		console.log('base case hit', 'array - ', array);
+
+		return 1;
+	} else {
+		// find mipoint of inputArray
+		const midpoint = Math.ceil(array.length / 2);
+		// console.log({ midpoint });
+
+		// make halves
+		//const halves = [array.slice(0, midpoint), array.slice(midpoint)];
+		//console.log(halves);
+
+		// make an array that holds both new arrays and make a recursive call
+		counter++;
+		console.log('------- end of logic, recursive call next --- ', counter);
+
+		mergeSort(array.slice(0, midpoint));
+		mergeSort(array.slice(midpoint));
+	}
+}
 mergeSort(inputArray);
