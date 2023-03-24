@@ -97,31 +97,27 @@ function mergeSort(array){
 
 */
 
-/*
+//or the same trial, said a different way
 
-or the same trial, said a different way
+const inputArray = [1, 2, 3, 4];
 
+function mergeSort(inputArray) {
+	if (inputArray.length === 1) {
+		// base case - a single element - return element to merged with nearest neighbor
+	} else {
+		//      find mipoint of inputArray
+		const midpoint = Math.floor(inputArray.length / 2);
 
-function mergeSort(inputArray){
+		//      make an array that holds both new arrays
 
-    if inputArray.length === 1 {
-        // base case - return element to merge with a merge algorithm
-    } else {
+		const twoHalves = [
+			inputArray.slice(0, midpoint),
+			inputArray.slice(midpoint),
+		];
+		console.log(twoHalves); // [ [ 1, 2 ], [ 3, 4 ] ]
 
-        find mipoint of inputArray
-        make newArrayLeft
-        push 0 to midpoint to newArrrayLeft
-        call mergeSort(newArrayLeft)
-
-
-
-
-
-    }
-
-
-
+		//    call mergeSort(newArrayLeft)
+	}
 }
 
-
-*/
+mergeSort(inputArray);
