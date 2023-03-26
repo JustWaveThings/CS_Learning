@@ -63,6 +63,27 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 	}
 };
 
+function preOrder(node) {
+	if (node === null) return;
+	console.log(`${node.value} + `);
+	preOrder(node.left);
+	preOrder(node.right);
+}
+
+function inOrder(node) {
+	if (node === null) return;
+	inOrder(node.left);
+	console.log(`${node.value} + `);
+	inOrder(node.right);
+}
+
+function postOrder(node) {
+	if (node === null) return;
+	postOrder(node.left);
+	postOrder(node.right);
+	console.log(`${node.value} + `);
+}
+
 //const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const test = new Tree([1, 2, 3, 4, 5, 6, 7]);
 prettyPrint(test.root);
