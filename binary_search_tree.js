@@ -160,6 +160,19 @@ function depth(bst, value) {
 }
 
 function height(bst, value) {
+	const node = find(bst, value);
+	if (node === null) return null;
+	return Math.max(getHeight(node.left), getHeight(node.right));
+}
+
+function getHeight(node) {
+	if (node === null) return 0;
+	const leftHeight = getHeight(node.left);
+	const rightHeight = getHeight(node.right);
+	return Math.max(leftHeight, rightHeight) + 1;
+}
+
+function height2(bst, value) {
 	let current = bst.root;
 	while (current.value !== value) {
 		if (value < current.value) {
@@ -203,7 +216,7 @@ function postOrder(node, output = []) {
 	return output;
 }
 
-// const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+//const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const test = new Tree([1, 2, 3, 4, 5, 6, 7]);
 
 /* prettyPrint(test.root);
@@ -220,4 +233,7 @@ insert(test.root, 8);
 const test4 = depth(test, 8);
 console.log(test4);
 prettyPrint(test.root);
+console.log('-------');
+const test5 = height(test.root, 6);
+console.log(test5);
 console.log('-------');
