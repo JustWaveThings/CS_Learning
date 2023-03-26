@@ -131,22 +131,6 @@ function getSuccessorRecursive(delNode, current, parent, isLeftChild) {
 	return getSuccessorRecursive(current, current.left, current, true);
 }
 
-/* function getSuccessor(delNode) {
-	let successorParent = delNode;
-	let successor = delNode;
-	let current = delNode.right;
-	while (current !== null) {
-		successorParent = successor;
-		successor = current;
-		current = current.left;
-	}
-	if (successor !== delNode.right) {
-		successorParent.left = successor.right;
-		successor.right = delNode.right;
-	}
-	return successor;
-}
- */
 function preOrder(node, output = []) {
 	if (node === null) {
 		return output;
@@ -159,21 +143,20 @@ function preOrder(node, output = []) {
 }
 
 function depth(bst, value) {
-	let currentDepth = 0;
-	let current = bst.root;
-	while (current.value !== value) {
-		if (value < current.value) {
-			current = current.left;
-			currentDepth++;
-		} else {
-			current = current.right;
-			currentDepth++;
-		}
-		if (current === null) {
+	function depthRecursive(node, value, currentDepth) {
+		if (node === null) {
 			return null;
 		}
+		if (node.value === value) {
+			return currentDepth;
+		}
+		if (value < node.value) {
+			return depthRecursive(node.left, value, currentDepth + 1);
+		} else {
+			return depthRecursive(node.right, value, currentDepth + 1);
+		}
 	}
-	return currentDepth;
+	return depthRecursive(bst.root, value, 0);
 }
 
 function height(bst, value) {
@@ -223,11 +206,18 @@ function postOrder(node, output = []) {
 // const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const test = new Tree([1, 2, 3, 4, 5, 6, 7]);
 
-prettyPrint(test.root);
+/* prettyPrint(test.root);
 console.log('-------');
 insert(test.root, 8);
 prettyPrint(test.root);
 console.log('-------');
-deleteNode(test.root, 8);
+deleteNode(test.root, 8); */
+prettyPrint(test.root);
+console.log('-------');
+const test3 = depth(test, 7);
+console.log(test3);
+insert(test.root, 8);
+const test4 = depth(test, 8);
+console.log(test4);
 prettyPrint(test.root);
 console.log('-------');
