@@ -79,29 +79,15 @@ function find(bst, value) {
 }
 
 function insert(bst, value) {
-	let newNode = new Node(value);
-	let current = bst.root;
-	if (current === null) {
-		bst.root = newNode;
-		return;
+	if (bst === null) {
+		return new Node(value);
 	}
-	while (current.value !== value) {
-		if (value < current.value) {
-			if (current.left === null) {
-				current.left = newNode;
-				return;
-			} else {
-				current = current.left;
-			}
-		} else {
-			if (current.right === null) {
-				current.right = newNode;
-				return;
-			} else {
-				current = current.right;
-			}
-		}
+	if (value < bst.value) {
+		bst.left = insert(bst.left, value);
+	} else {
+		bst.right = insert(bst.right, value);
 	}
+	return bst;
 }
 
 function deleteNode(bst, value) {
@@ -252,11 +238,14 @@ const test = new Tree([1, 2, 3, 4, 5, 6, 7]);
 prettyPrint(test.root);
 console.log('-------');
 
-const test2 = find(test.root, 6);
-console.log(test2);
-// console.log('-------');
+// const test2 = find(test.root, 6);
+const test3 = insert(test.root, 8);
+// console.log(test2);
+console.log(test3);
+
+console.log('-------');
 // insert(test, 8);
-// prettyPrint(test.root);
+prettyPrint(test.root);
 
 console.log('-------');
 /*
