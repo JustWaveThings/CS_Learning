@@ -49,7 +49,7 @@ class buildTree {
 	}
 }
 
-// to pring a visual representation of the tree in the console
+// to print a visual representation of the tree in the console
 const prettyPrint = (node, prefix = '', isLeft = true) => {
 	if (node === null) {
 		return;
@@ -64,18 +64,18 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 };
 
 function find(bst, value) {
-	let current = bst.root;
-	while (current.value !== value) {
-		if (value < current.value) {
-			current = current.left;
-		} else {
-			current = current.right;
-		}
-		if (current === null) {
-			return null;
-		}
+	let current = bst;
+	if (current === null || current === undefined) {
+		return null;
 	}
-	return current;
+	if (current.value === value) {
+		return current;
+	}
+	if (value < current.value) {
+		return find(current.left, value);
+	} else {
+		return find(current.right, value);
+	}
 }
 
 function insert(bst, value) {
@@ -183,6 +183,54 @@ function preOrder(node, output = []) {
 	}
 }
 
+function depth(bst, value) {
+	let currentDepth = 0;
+	let current = bst.root;
+	while (current.value !== value) {
+		if (value < current.value) {
+			current = current.left;
+			currentDepth++;
+		} else {
+			current = current.right;
+			currentDepth++;
+		}
+		if (current === null) {
+			return null;
+		}
+	}
+	return currentDepth;
+}
+
+function height(bst, value) {
+	let current = bst.root;
+	while (current.value !== value) {
+		if (value < current.value) {
+			current = current.left;
+		} else {
+			current = current.right;
+		}
+		if (current === null) {
+			return null;
+		}
+	}
+	let currentLeftHeight = 0;
+	let currentRightHeight = 0;
+	while (current.left !== null || current.right !== null) {
+		//	currentLeftHeight++;
+		//	currentRightHeight++;
+		if (current.left !== null) {
+			current = current.left;
+			currentLeftHeight++;
+		} else {
+			current = current.right;
+			currentRightHeight++;
+		}
+		return currentLeftHeight >= currentRightHeight
+			? currentLeftHeight
+			: currentRightHeight;
+	}
+}
+
 function inOrder(node, output = []) {
 	if (node === null) return output;
 	inOrder(node.left, output);
@@ -199,17 +247,16 @@ function postOrder(node, output = []) {
 	return output;
 }
 
-//const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
+// const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const test = new Tree([1, 2, 3, 4, 5, 6, 7]);
-// prettyPrint(test.root);
+prettyPrint(test.root);
+console.log('-------');
+
+const test2 = find(test.root, 6);
+console.log(test2);
 // console.log('-------');
 // insert(test, 8);
 // prettyPrint(test.root);
-
-console.log('-------');
-
-const test2 = postOrder(test.root);
-console.log(test2);
 
 console.log('-------');
 /*
