@@ -172,38 +172,47 @@ function getSuccessor(delNode) {
 	return successor;
 }
 
-function preOrder(node) {
-	if (node === null) return;
-	console.log(node.value);
-	preOrder(node.left);
-	preOrder(node.right);
+function preOrder(node, output = []) {
+	if (node === null) {
+		return output;
+	} else {
+		output.push(node.value);
+		preOrder(node.left, output);
+		preOrder(node.right, output);
+		return output;
+	}
 }
 
-function inOrder(node) {
-	if (node === null) return;
-	inOrder(node.left);
-	console.log(node.value);
-	inOrder(node.right);
+function inOrder(node, output = []) {
+	if (node === null) return output;
+	inOrder(node.left, output);
+	output.push(node.value);
+	inOrder(node.right, output);
+	return output;
 }
 
-function postOrder(node) {
-	if (node === null) return;
-	postOrder(node.left);
-	postOrder(node.right);
-	console.log(node.value);
+function postOrder(node, output = []) {
+	if (node === null) return output;
+	postOrder(node.left, output);
+	postOrder(node.right, output);
+	output.push(node.value);
+	return output;
 }
 
 //const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const test = new Tree([1, 2, 3, 4, 5, 6, 7]);
-prettyPrint(test.root);
-console.log('-------');
-insert(test, 8);
-prettyPrint(test.root);
+// prettyPrint(test.root);
+// console.log('-------');
+// insert(test, 8);
+// prettyPrint(test.root);
 
 console.log('-------');
 
-/* // preOrder(test.root);
+const test2 = postOrder(test.root);
+console.log(test2);
+
 console.log('-------');
+/*
 inOrder(test.root);
 console.log('-------');
 // postOrder(test.root);
@@ -211,5 +220,5 @@ console.log(find(test, 0));
 insert(test, 8);
 prettyPrint(test.root); */
 
-deleteNode(test, 2);
-prettyPrint(test.root);
+//deleteNode(test, 2);
+// prettyPrint(test.root);
