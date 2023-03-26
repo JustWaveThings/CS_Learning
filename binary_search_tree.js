@@ -116,6 +116,22 @@ function deleteNode(node, value) {
 }
 
 function getSuccessor(delNode) {
+	return getSuccessorRecursive(delNode, delNode.right, delNode, false);
+}
+
+function getSuccessorRecursive(delNode, current, parent, isLeftChild) {
+	if (current === null) {
+		if (isLeftChild) {
+			parent.left = null;
+		} else {
+			parent.right = null;
+		}
+		return delNode;
+	}
+	return getSuccessorRecursive(current, current.left, current, true);
+}
+
+/* function getSuccessor(delNode) {
 	let successorParent = delNode;
 	let successor = delNode;
 	let current = delNode.right;
@@ -130,7 +146,7 @@ function getSuccessor(delNode) {
 	}
 	return successor;
 }
-
+ */
 function preOrder(node, output = []) {
 	if (node === null) {
 		return output;
