@@ -63,7 +63,7 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
 	}
 };
 
-function findA(bst, value) {
+function find(bst, value) {
 	let current = bst.root;
 	while (current.value !== value) {
 		if (value < current.value) {
@@ -108,4 +108,4 @@ console.log('-------');
 inOrder(test.root);
 console.log('-------');
 // postOrder(test.root);
-console.log(findA(test, 0));
+console.log(find(test, 0));
