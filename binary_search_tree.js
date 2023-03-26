@@ -172,34 +172,6 @@ function getHeight(node) {
 	return Math.max(leftHeight, rightHeight) + 1;
 }
 
-function height2(bst, value) {
-	let current = bst.root;
-	while (current.value !== value) {
-		if (value < current.value) {
-			current = current.left;
-		} else {
-			current = current.right;
-		}
-		if (current === null) {
-			return null;
-		}
-	}
-	let currentLeftHeight = 0;
-	let currentRightHeight = 0;
-	while (current.left !== null || current.right !== null) {
-		if (current.left !== null) {
-			current = current.left;
-			currentLeftHeight++;
-		} else {
-			current = current.right;
-			currentRightHeight++;
-		}
-		return currentLeftHeight >= currentRightHeight
-			? currentLeftHeight
-			: currentRightHeight;
-	}
-}
-
 function inOrder(node, output = []) {
 	if (node === null) return output;
 	inOrder(node.left, output);
