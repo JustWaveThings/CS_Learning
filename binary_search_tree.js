@@ -78,6 +78,100 @@ function find(bst, value) {
 	return current;
 }
 
+function insert(bst, value) {
+	let newNode = new Node(value);
+	let current = bst.root;
+	if (current === null) {
+		bst.root = newNode;
+		return;
+	}
+	while (current.value !== value) {
+		if (value < current.value) {
+			if (current.left === null) {
+				current.left = newNode;
+				return;
+			} else {
+				current = current.left;
+			}
+		} else {
+			if (current.right === null) {
+				current.right = newNode;
+				return;
+			} else {
+				current = current.right;
+			}
+		}
+	}
+}
+
+function deleteNode(bst, value) {
+	let current = bst.root;
+	let parent = bst.root;
+	let isLeftChild = true;
+	while (current.value !== value) {
+		parent = current;
+		if (value < current.value) {
+			isLeftChild = true;
+			current = current.left;
+		} else {
+			isLeftChild = false;
+			current = current.right;
+		}
+		if (current === null) {
+			return null;
+		}
+	}
+	// if node is leaf, remove it from tree
+	if (current.left === null && current.right === null) {
+		if (current === bst.root) {
+			bst.root = null;
+		} else if (isLeftChild) {
+			parent.left = null;
+		} else {
+			parent.right = null;
+		}
+		// if node has one child, replace it with its child
+	} else if (current.right === null) {
+		if (current === bst.root) {
+			bst.root = current.left;
+		} else if (isLeftChild) {
+			parent.left = current.left;
+		} else {
+			parent.right = current.left;
+		}
+	}
+
+	// if node has two children, replace it with the smallest value in the right subtree
+
+	if (current.left !== null && current.right !== null) {
+		let successor = getSuccessor(current);
+		if (current === bst.root) {
+			bst.root = successor;
+		} else if (isLeftChild) {
+			parent.left = successor;
+		} else {
+			parent.right = successor;
+		}
+		successor.left = current.left;
+	}
+}
+
+function getSuccessor(delNode) {
+	let successorParent = delNode;
+	let successor = delNode;
+	let current = delNode.right;
+	while (current !== null) {
+		successorParent = successor;
+		successor = current;
+		current = current.left;
+	}
+	if (successor !== delNode.right) {
+		successorParent.left = successor.right;
+		successor.right = delNode.right;
+	}
+	return successor;
+}
+
 function preOrder(node) {
 	if (node === null) return;
 	console.log(node.value);
@@ -102,10 +196,20 @@ function postOrder(node) {
 //const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
 const test = new Tree([1, 2, 3, 4, 5, 6, 7]);
 prettyPrint(test.root);
+console.log('-------');
+insert(test, 8);
+prettyPrint(test.root);
 
-// preOrder(test.root);
+console.log('-------');
+
+/* // preOrder(test.root);
 console.log('-------');
 inOrder(test.root);
 console.log('-------');
 // postOrder(test.root);
 console.log(find(test, 0));
+insert(test, 8);
+prettyPrint(test.root); */
+
+deleteNode(test, 2);
+prettyPrint(test.root);
