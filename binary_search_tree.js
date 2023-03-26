@@ -285,45 +285,140 @@ function driverScript() {
 
 driverScript();
 
-/* //const test = new Tree([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]);
-const test = new Tree([1, 2, 3, 4, 5, 6, 7]);
+/* output from script
 
-/* prettyPrint(test.root);
-console.log('-------');
-insert(test.root, 8);
-prettyPrint(test.root);
-console.log('-------');
-deleteNode(test.root, 8);
-prettyPrint(test.root);
-console.log('-------');
-const test3 = depth(test, 7);
-console.log(test3);
-const test4 = depth(test, 8);
-console.log(test4);
-prettyPrint(test.root);
-console.log('-------');
-const test5 = height(test.root, 6);
-console.log(test5);
-console.log('-------');
-const test6 = isBalanced(test.root);
-console.log(test6);
-insert(test.root, 8);
-insert(test.root, 800);
-insert(test.root, 900);
-insert(test.root, 1000);
-insert(test.root, 1100);
-insert(test.root, 1200);
-insert(test.root, 1300);
-insert(test.root, 1400);
-insert(test.root, 1500);
-insert(test.root, 1600);
-insert(test.root, 1700);
-console.log('-------');
-const test7 = rebalance(test.root);
-prettyPrint(test.root);
-console.log('-------');
-const test8 = isBalanced(test7.root);
-console.log(test8);
-console.log('-------');
-prettyPrint(test7.root);
- */
+[
+  36,  5, 54, 54, 75,
+  70, 52, 49, 82, 72
+]
+-----------------------
+│       ┌── 82
+│   ┌── 75
+│   │   └── 72
+│   │       └── 70
+└── 54
+    │   ┌── 52
+    └── 49
+        └── 36
+            └── 5
+-----------------------
+true isBalanced
+-----------------------
+Level Order
+54
+49
+75
+36
+52
+72
+82
+5
+70
+undefined
+-----------------------
+Pre Order
+[
+  54, 49, 36,  5, 52,
+  75, 72, 70, 82
+]
+-----------------------
+In Order
+[
+   5, 36, 49, 52, 54,
+  70, 72, 75, 82
+]
+-----------------------
+Post Order
+[
+   5, 36, 52, 49, 70,
+  72, 82, 75, 54
+]
+-----------------------
+Depth
+2  -  52
+-----------------------
+Height
+0  -  52
+-----------------------
+│                                                           ┌── 20000
+│                                                       ┌── 19000
+│                                                   ┌── 18000
+│                                               ┌── 17000
+│                                           ┌── 16000
+│                                       ┌── 15000
+│                                   ┌── 14000
+│                               ┌── 13000
+│                           ┌── 12000
+│                       ┌── 11000
+│                   ┌── 10000
+│               ┌── 9000
+│           ┌── 8000
+│       ┌── 82
+│   ┌── 75
+│   │   └── 72
+│   │       └── 70
+└── 54
+    │   ┌── 52
+    └── 49
+        └── 36
+            └── 5
+-----------------------
+false isBalanced
+-----------------------
+│           ┌── 20000
+│       ┌── 19000
+│       │   └── 18000
+│       │       └── 17000
+│   ┌── 16000
+│   │   │   ┌── 15000
+│   │   │   │   └── 14000
+│   │   └── 13000
+│   │       └── 12000
+│   │           └── 11000
+└── 10000
+    │       ┌── 9000
+    │       │   └── 8000
+    │   ┌── 82
+    │   │   └── 75
+    │   │       └── 72
+    └── 70
+        │   ┌── 54
+        │   │   └── 52
+        └── 49
+            └── 36
+                └── 5
+-----------------------
+true isBalanced
+-----------------------
+Pre Order
+[
+     54,    49,    36,     5,
+     52,    75,    72,    70,
+     82,  8000,  9000, 10000,
+  11000, 12000, 13000, 14000,
+  15000, 16000, 17000, 18000,
+  19000, 20000
+]
+-----------------------
+In Order
+[
+      5,    36,    49,    52,
+     54,    70,    72,    75,
+     82,  8000,  9000, 10000,
+  11000, 12000, 13000, 14000,
+  15000, 16000, 17000, 18000,
+  19000, 20000
+]
+-----------------------
+Post Order
+[
+      5,    36,    52,    49,
+     70,    72, 20000, 19000,
+  18000, 17000, 16000, 15000,
+  14000, 13000, 12000, 11000,
+  10000,  9000,  8000,    82,
+     75,    54
+]
+-----------------------
+
+*/
