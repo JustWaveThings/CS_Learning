@@ -1,0 +1,13 @@
+{
+  "name": "cs_learning",
+  "version": "1.0.0",
+  "description": "Exercises from the 'A Bit of Computer Science' section on the JS path in TOP",
+  "main": "binary_search_tree.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
