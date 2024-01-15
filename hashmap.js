@@ -72,11 +72,11 @@ function HashMap() {
     }
   };
 
-  const get = key => {};
+  const get = key => (buckets[key]?.nodeValues() ? buckets[key]?.nodeValues() : null);
 
   const has = key => {};
 
-  const remove = key => {};
+  const remove = key => (buckets[key] = null);
 
   const length = () => {
     return values().valueListFlat.length;
@@ -147,3 +147,5 @@ names.forEach(name => {
 // hm.logAfter();
 // console.log(hm.values().valueList);
 console.log(hm.length());
+console.log(hm.keys());
+console.log(hm.get(4));
