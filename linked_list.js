@@ -134,7 +134,7 @@ export class LinkedList {
     let current = this.head;
     let values = [];
     while (current !== null) {
-      values.push(current.value.value);
+      values.push(current.value);
       current = current.next;
     }
     return values;
