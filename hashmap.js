@@ -6,19 +6,15 @@ function HashMap() {
   let keyCount = 0;
 
   let buckets = Array.from({ length: capacity }, () => null);
-
+  let newBuckets = [];
   const insert = value => {
-    // check load ratio first, expand if needed
-    checkLoadRatio();
+    // check load ratio, if overloaded, expand array and set previous values
+    manageLoadRatio();
     // calc hash and key
     const hashValue = hash(value);
     const keyValue = hashValue.hashCode % capacity;
-
-    // set hashValue value pair in correct keyValue bucket
-    console.log('keyValue - ', keyValue, hashValue, capacity, ' - table capacity');
     set(keyValue, hashValue);
     keyCount++;
-    // console.log(keyCount);
   };
 
   const hash = value => {
@@ -32,18 +28,21 @@ function HashMap() {
     return { hashCode, value };
   };
 
-  const checkLoadRatio = () => {
+  const manageLoadRatio = () => {
     const loadRatio = keyCount / capacity;
     const overLoaded = loadRatio >= loadFactor;
 
     if (overLoaded) {
+      const currentValues = values().valueListFlat;
       const newCapacity = capacity * 2;
-      const newBuckets = Array.from({ length: newCapacity }, () => null);
 
-      // so instead of wholesale copying because that copies the whole element, I need to spread each node into the new array.
-      // so they would need new bucket keys...
+      buckets = Array.from({ length: newCapacity }, () => null);
 
-      buckets = newBuckets;
+      currentValues.forEach(obj => {
+        const newKeyValue = obj.hashCode % newCapacity;
+        set(newKeyValue, obj);
+      });
+
       capacity = newCapacity;
     }
   };
@@ -143,6 +142,5 @@ const hm = HashMap();
 names.forEach(name => {
   hm.insert(name);
 });
-
-console.log(hm.values(), ' - hm.values()');
-hm.logAfter();
+// hm.logAfter();
+console.log(hm.values().valueList);
