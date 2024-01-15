@@ -111,17 +111,18 @@ function HashMap() {
     console.log(buckets, ' - this is the logAfter function', buckets.length);
   };
 
-  /*   const entries = () => {
-    const keyList = [];
-    for (let i = 0; i < buckets.length; i++){
+  const entries = () => {
+    const entryList = [];
+    for (let i = 0; i < buckets.length; i++) {
       if (buckets[i] !== null) {
-        values = buckets[i].nodeValues()
-        values.forEach(val => {
-          keyList.push(val.)
-        })
+        const entries = buckets[i].nodeValues();
+        entries.forEach(val => {
+          entryList.push([i, val]);
+        });
       }
     }
-  }; */
+    return entryList;
+  };
 
   return {
     insert,
@@ -132,7 +133,7 @@ function HashMap() {
     clear,
     keys,
     values,
-
+    entries,
     logAfter,
   };
 }
@@ -180,3 +181,5 @@ console.log(hm.get(4));
 console.log(hm.remove(4));
 console.log(hm.get(4));
 console.log(hm.keys());
+
+console.log(hm.entries());
