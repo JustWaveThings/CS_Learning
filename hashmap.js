@@ -6,7 +6,7 @@ function HashMap() {
   let keyCount = 0;
 
   let buckets = Array.from({ length: capacity }, () => null);
-  let newBuckets = [];
+
   const insert = value => {
     // check load ratio, if overloaded, expand array and set previous values
     manageLoadRatio();
@@ -72,11 +72,19 @@ function HashMap() {
     }
   };
 
-  const get = key => (buckets[key]?.nodeValues() ? buckets[key]?.nodeValues() : null);
+  const get = key => (buckets[key]?.nodeValues() ? buckets[key].nodeValues() : null);
 
-  const has = key => {};
+  const has = key => (buckets[key] !== null ? true : false);
 
-  const remove = key => (buckets[key] = null);
+  const remove = key => {
+    const bucketEmpty = has(key);
+
+    if (bucketEmpty) {
+      buckets[key] = null;
+      return true;
+    }
+    return false;
+  };
 
   const length = () => {
     return values().valueListFlat.length;
@@ -89,13 +97,31 @@ function HashMap() {
     return null;
   };
 
-  const keys = () => {};
+  const keys = () => {
+    const keyList = [];
+    for (let i = 0; i < buckets.length; i++) {
+      if (buckets[i] !== null) {
+        keyList.push(i);
+      }
+    }
+    return keyList;
+  };
 
   const logAfter = () => {
     console.log(buckets, ' - this is the logAfter function', buckets.length);
   };
 
-  const entries = () => {};
+  /*   const entries = () => {
+    const keyList = [];
+    for (let i = 0; i < buckets.length; i++){
+      if (buckets[i] !== null) {
+        values = buckets[i].nodeValues()
+        values.forEach(val => {
+          keyList.push(val.)
+        })
+      }
+    }
+  }; */
 
   return {
     insert,
@@ -106,7 +132,7 @@ function HashMap() {
     clear,
     keys,
     values,
-    entries,
+
     logAfter,
   };
 }
@@ -147,5 +173,10 @@ names.forEach(name => {
 // hm.logAfter();
 // console.log(hm.values().valueList);
 console.log(hm.length());
-console.log(hm.keys());
+console.log(hm.get(3));
+console.log(hm.has(3));
+console.log(hm.remove(3));
 console.log(hm.get(4));
+console.log(hm.remove(4));
+console.log(hm.get(4));
+console.log(hm.keys());
