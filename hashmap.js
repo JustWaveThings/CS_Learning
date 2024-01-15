@@ -78,7 +78,9 @@ function HashMap() {
 
   const remove = key => {};
 
-  const length = () => {};
+  const length = () => {
+    return values().valueListFlat.length;
+  };
 
   const clear = () => {
     buckets = [];
@@ -143,4 +145,5 @@ names.forEach(name => {
   hm.insert(name);
 });
 // hm.logAfter();
-console.log(hm.values().valueList);
+// console.log(hm.values().valueList);
+console.log(hm.length());
