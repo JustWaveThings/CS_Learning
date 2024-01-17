@@ -1,4 +1,5 @@
 import { LinkedList } from './linked_list.js';
+import { top75 } from './input.js';
 
 function HashMap() {
   let capacity = 16;
@@ -14,11 +15,22 @@ function HashMap() {
     for (let i = 0; i < value.length; i++) {
       hashCode = primeNumber * hashCode + value.charCodeAt(i);
     }
+    hashCode = hashCode % capacity;
 
     return hashCode;
   };
 
-  const set = (key, value) => {};
+  const set = (key, value) => {
+    const index = hash(key);
+    if (buckets[index] !== null) {
+      buckets[index].append({ key, value });
+      console.log(`${key} - key, ${value} points - value, appended to LL in bucket ${index}`);
+    } else {
+      buckets[index] = new LinkedList();
+      buckets[index].append({ key, value });
+      console.log(`${key} - key, ${value} points - value, new Linked List in bucket ${index}`);
+    }
+  };
 
   const manageLoadRatio = () => {
     const loadRatio = keyCount / capacity;
@@ -43,7 +55,10 @@ function HashMap() {
 
   const get = key => {};
 
-  const has = key => {};
+  /*   const has = key => {
+    const hashCode = hash(key);
+    buckets[hashcode] ===
+  }; */
 
   const remove = key => {};
 
@@ -60,9 +75,14 @@ function HashMap() {
 
   const entries = () => {};
 
+  const logAfter = () => {
+    console.log(buckets, ' - this is the logAfter function', buckets.length);
+  };
+
   return {
+    set,
     get,
-    has,
+    /*   has, */
     remove,
     length,
     clear,
@@ -73,36 +93,8 @@ function HashMap() {
   };
 }
 
-const names = [
-  'toby',
-  'Carlos',
-  'timato',
-  'KM',
-  'josh',
-  'Marvin',
-  'mdfr4nk',
-  'nevz',
-  'Mr. ARL',
-  'Cake',
-  'rlmoser',
-  'takinabradley',
-  'Manon',
-  'Eduardo06sp',
-  'Scheals',
-  'Mao',
-  'Miggels',
-  'JMyers',
-  'Arun',
-  'BriggsE',
-  'Bender',
-  '105Ron',
-  'Zach',
-  'var(--cody)',
-  'zer0',
-];
-
 const hm = HashMap();
 
-names.forEach(name => {
-  hm.insert(name);
+top75.forEach(obj => {
+  hm.set(obj.name, obj.points);
 });
