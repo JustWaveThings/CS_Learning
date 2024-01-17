@@ -105,6 +105,17 @@ export class LinkedList {
     return false;
   }
 
+  containsObjKey(key) {
+    let current = this.head;
+    while (current !== null) {
+      if (current.value.key === key) {
+        return true;
+      }
+      current = current.next;
+    }
+    return false;
+  }
+
   find(value) {
     let count = 0;
     let current = this.head;
