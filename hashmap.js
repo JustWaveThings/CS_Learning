@@ -13,23 +13,26 @@ function HashMap() {
     const primeNumber = 31;
 
     for (let i = 0; i < value.length; i++) {
-      hashCode = primeNumber * hashCode + value.charCodeAt(i);
+      hashCode = BigInt(primeNumber) * BigInt(hashCode) + BigInt(value.charCodeAt(i));
     }
-    hashCode = hashCode % capacity;
-
+    hashCode = BigInt(hashCode) % BigInt(capacity);
+    console.log(hashCode);
     return hashCode;
   };
 
   const set = (key, value) => {
+    manageLoadRatio();
     const index = hash(key);
+
     if (buckets[index] !== null) {
       buckets[index].append({ key, value });
-      console.log(`${key} - key, ${value} points - value, appended to LL in bucket ${index}`);
+      // console.log(`${key} - key, ${value} points - value, appended to LL in bucket ${index}`);
     } else {
       buckets[index] = new LinkedList();
       buckets[index].append({ key, value });
-      console.log(`${key} - key, ${value} points - value, new Linked List in bucket ${index}`);
+      // console.log(`${key} - key, ${value} points - value, new Linked List in bucket ${index}`);
     }
+    keyCount++;
   };
 
   const manageLoadRatio = () => {
@@ -41,17 +44,29 @@ function HashMap() {
       const newCapacity = capacity * 2;
 
       buckets = Array.from({ length: newCapacity }, () => null);
+      keyCount = 0;
 
       currentValues.forEach(obj => {
-        const newKeyValue = obj.hashCode % newCapacity;
-        set(newKeyValue, obj);
+        set(obj.key, obj.value);
       });
 
       capacity = newCapacity;
     }
   };
 
-  const values = () => {};
+  const values = () => {
+    let valueList = [];
+    for (let i = 0; i < buckets.length; i++) {
+      const empty = buckets[i] === null;
+
+      if (!empty) {
+        valueList.push(buckets[i].nodeValues());
+      }
+    }
+    const valueListFlat = valueList.flat();
+
+    return { valueList, valueListFlat };
+  };
 
   const get = key => {};
 
