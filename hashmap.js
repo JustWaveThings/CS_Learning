@@ -16,12 +16,13 @@ function HashMap() {
       hashCode = BigInt(primeNumber) * BigInt(hashCode) + BigInt(value.charCodeAt(i));
     }
     hashCode = BigInt(hashCode) % BigInt(capacity);
-    console.log(hashCode);
+    hashCode = Number(hashCode);
     return hashCode;
   };
 
   const set = (key, value) => {
     manageLoadRatio();
+
     const index = hash(key);
 
     if (buckets[index] !== null) {
@@ -43,14 +44,23 @@ function HashMap() {
       const currentValues = values().valueListFlat;
       const newCapacity = capacity * 2;
 
+      capacity = newCapacity;
       buckets = Array.from({ length: newCapacity }, () => null);
       keyCount = 0;
 
-      currentValues.forEach(obj => {
-        set(obj.key, obj.value);
-      });
+      currentValues.forEach(({ key, value }) => {
+        const index = hash(key);
 
-      capacity = newCapacity;
+        if (buckets[index] !== null) {
+          buckets[index].append({ key, value });
+          // console.log(`${key} - key, ${value} points - value, appended to LL in bucket ${index}`);
+        } else {
+          buckets[index] = new LinkedList();
+          buckets[index].append({ key, value });
+          // console.log(`${key} - key, ${value} points - value, new Linked List in bucket ${index}`);
+        }
+        keyCount++;
+      });
     }
   };
 
@@ -70,10 +80,11 @@ function HashMap() {
 
   const get = key => {};
 
-  /*   const has = key => {
+  const has = key => {
     const hashCode = hash(key);
-    buckets[hashcode] ===
-  }; */
+    const exists = buckets[hashCode] !== null && buckets[hashCode]?.containsObjKey(key);
+    return exists;
+  };
 
   const remove = key => {};
 
@@ -97,7 +108,7 @@ function HashMap() {
   return {
     set,
     get,
-    /*   has, */
+    has,
     remove,
     length,
     clear,
@@ -113,3 +124,5 @@ const hm = HashMap();
 top75.forEach(obj => {
   hm.set(obj.name, obj.points);
 });
+
+console.log(hm.has('KM'));
