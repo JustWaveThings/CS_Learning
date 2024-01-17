@@ -5,6 +5,7 @@ function HashMap() {
   let capacity = 16;
   const loadFactor = 0.75;
   let keyCount = 0;
+  let timesGrown = 0;
 
   let buckets = Array.from({ length: capacity }, () => null);
 
@@ -41,10 +42,11 @@ function HashMap() {
     const overLoaded = loadRatio >= loadFactor;
 
     if (overLoaded) {
+      timesGrown++;
       const currentValues = values().valueListFlat;
       const newCapacity = capacity * 2;
-
       capacity = newCapacity;
+
       buckets = Array.from({ length: newCapacity }, () => null);
       keyCount = 0;
 
@@ -78,11 +80,15 @@ function HashMap() {
     return { valueList, valueListFlat };
   };
 
-  const get = key => {};
+  const get = key => {
+    if (!has(key)) return null;
+    const index = hash(key);
+    console.log(buckets[index].toString());
+  };
 
   const has = key => {
-    const hashCode = hash(key);
-    const exists = buckets[hashCode] !== null && buckets[hashCode]?.containsObjKey(key);
+    const index = hash(key);
+    const exists = buckets[index] !== null && buckets[index]?.containsObjKey(key);
     return exists;
   };
 
@@ -102,7 +108,15 @@ function HashMap() {
   const entries = () => {};
 
   const logAfter = () => {
-    console.log(buckets, ' - this is the logAfter function', buckets.length);
+    buckets.forEach((bucket, i) => {
+      bucket ? console.log(i + 1, ' - ', bucket.toString()) : console.log(i + 1, ' - ', 'empty bucket');
+    });
+    console.log('-----------------');
+    console.log('hashmap data');
+    console.log('-----------------');
+    console.log({ capacity });
+    console.log(capacity === buckets.length ? '- Array Length matches Capacity' : '- Array Length does not match Capacity');
+    console.log('- Times hashmap had to grow: ', timesGrown);
   };
 
   return {
@@ -125,4 +139,4 @@ top75.forEach(obj => {
   hm.set(obj.name, obj.points);
 });
 
-console.log(hm.has('KM'));
+hm.logAfter();
