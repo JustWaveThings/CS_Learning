@@ -92,7 +92,7 @@ export const top75 = [
   { name: 'Mr. ARL | Foundations NaN% ', points: '1465' },
   { name: 'Cake ', points: '1430' },
   { name: 'rlmoser ', points: '1378' },
-  { name: 'takinabradley (GrenadePit) ', points: '1333' },
+  /* { name: 'takinabradley (GrenadePit) ', points: '1333' },
   { name: 'Manon || NaN ', points: '1254' },
   { name: 'Eduardo06sp ', points: '1253' },
   { name: 'Scheals ', points: '1225' },
@@ -155,5 +155,5 @@ export const top75 = [
   { name: 'lordofth ', points: '279' },
   { name: 'mireles ', points: '270' },
   { name: 'print("Please reboot Asarta.py") ', points: '262' },
-  { name: 'BiFF ', points: '260' },
+  { name: 'BiFF ', points: '260' }, */
 ];
