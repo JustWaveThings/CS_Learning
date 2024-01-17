@@ -68,6 +68,7 @@ function HashMap() {
 
   const values = () => {
     let valueList = [];
+    let valuesOnlyList = [];
     for (let i = 0; i < buckets.length; i++) {
       const empty = buckets[i] === null;
 
@@ -76,8 +77,11 @@ function HashMap() {
       }
     }
     const valueListFlat = valueList.flat();
+    valueListFlat.forEach(pair => {
+      valuesOnlyList.push(pair.value);
+    });
 
-    return { valueList, valueListFlat };
+    return { valueList, valueListFlat, valuesOnlyList };
   };
 
   const get = key => {
@@ -94,7 +98,9 @@ function HashMap() {
 
   const remove = key => {};
 
-  const length = () => {};
+  const length = () => {
+    return entries().length;
+  };
 
   const clear = () => {
     buckets = [];
@@ -103,9 +109,37 @@ function HashMap() {
     return null;
   };
 
-  const keys = () => {};
+  const keys = () => {
+    let valueList = [];
+    let keysList = [];
+    for (let i = 0; i < buckets.length; i++) {
+      const empty = buckets[i] === null;
 
-  const entries = () => {};
+      if (!empty) {
+        valueList.push(buckets[i].nodeValues());
+      }
+    }
+    const valueListFlat = valueList.flat();
+    valueListFlat.forEach(pair => {
+      keysList.push(pair.key);
+    });
+
+    return { valueList, valueListFlat, keysList };
+  };
+
+  const entries = () => {
+    let valueList = [];
+    for (let i = 0; i < buckets.length; i++) {
+      const empty = buckets[i] === null;
+
+      if (!empty) {
+        valueList.push(buckets[i].nodeValues());
+      }
+    }
+    const valueListFlat = valueList.flat();
+
+    return valueListFlat;
+  };
 
   const logAfter = () => {
     buckets.forEach((bucket, i) => {
@@ -139,4 +173,8 @@ top75.forEach(obj => {
   hm.set(obj.name, obj.points);
 });
 
-hm.logAfter();
+// console.log(hm.values().valuesOnlyList);
+
+// console.log(hm.keys().keysList);
+
+console.log(hm.length());
