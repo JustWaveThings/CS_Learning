@@ -24,6 +24,13 @@ function HashMap() {
   const set = (key, value) => {
     manageLoadRatio();
 
+    const exists = has(key);
+
+    if (exists) {
+      remove(key);
+      keyCount--;
+    }
+
     const index = hash(key);
 
     if (buckets[index] !== null) {
@@ -183,7 +190,7 @@ top75.forEach(obj => {
 // console.log(hm.keys().keysList);
 
 // hm.logAfter();
-console.log(hm.remove('Dr. Juice'));
+/* console.log(hm.remove('Dr. Juice'));
 console.log(hm.get('Dr. Juice'));
 console.log(hm.remove('Mclilzee'));
 console.log(hm.get('Mclilzee'));
@@ -192,5 +199,5 @@ console.log(hm.remove('jmooree30'));
 console.log(hm.get('jmooree30'));
 
 console.log(hm.remove('Javi M'));
-console.log(hm.get('Javi M'));
+console.log(hm.get('Javi M')); */
 hm.logAfter();
