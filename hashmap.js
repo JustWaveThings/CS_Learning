@@ -87,7 +87,7 @@ function HashMap() {
   const get = key => {
     if (!has(key)) return null;
     const index = hash(key);
-    console.log(buckets[index].toString());
+    return buckets[index].findValueObj(key);
   };
 
   const has = key => {
@@ -96,7 +96,12 @@ function HashMap() {
     return exists;
   };
 
-  const remove = key => {};
+  const remove = key => {
+    if (!has(key)) return false;
+    const index = hash(key);
+    buckets[index].removeAtObj(key);
+    return true;
+  };
 
   const length = () => {
     return entries().length;
@@ -177,4 +182,15 @@ top75.forEach(obj => {
 
 // console.log(hm.keys().keysList);
 
-console.log(hm.length());
+// hm.logAfter();
+console.log(hm.remove('Dr. Juice'));
+console.log(hm.get('Dr. Juice'));
+console.log(hm.remove('Mclilzee'));
+console.log(hm.get('Mclilzee'));
+console.log(hm.remove('Ryan McEntire | Clowdy'));
+console.log(hm.remove('jmooree30'));
+console.log(hm.get('jmooree30'));
+
+console.log(hm.remove('Javi M'));
+console.log(hm.get('Javi M'));
+hm.logAfter();
