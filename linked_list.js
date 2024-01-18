@@ -105,6 +105,18 @@ export class LinkedList {
     return false;
   }
 
+  findValueObj(key) {
+    let current = this.head;
+    let count = 0;
+    while (current !== null) {
+      if (current.value.key === key) {
+        return current.value.value;
+      }
+      current = current.next;
+    }
+    return null;
+  }
+
   containsObjKey(key) {
     let current = this.head;
     while (current !== null) {
@@ -134,7 +146,7 @@ export class LinkedList {
     let current = this.head;
     let string = '';
     while (current !== null) {
-      string += `(${current.value}) -> `;
+      string += `(${current.value.key} : ${current.value.value} points) -> `;
       current = current.next;
     }
     string += 'null';
@@ -175,6 +187,24 @@ export class LinkedList {
       current = current.next;
     }
     previous.next = current.next;
+  }
+
+  removeAtObj(key) {
+    if (this.size() === 1) return this.pop();
+    let current = this.head;
+    let previous = null;
+
+    while (current.value.key !== key) {
+      console.log('hit while statement');
+      previous = current;
+      current = current.next;
+    }
+    if (current === this.head) {
+      console.log('if statement');
+      this.head = current.next;
+    } else {
+      previous.next = current.next;
+    }
   }
 }
 
