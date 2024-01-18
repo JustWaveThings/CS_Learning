@@ -83,6 +83,7 @@ const topPoints = raw.split('\n').map(line => {
 export const top75 = [
   { name: 'tobyPlaysTheUke', points: 4311 },
   { name: 'Carlos', points: 3511 },
+  { name: 'Carlos', points: 35000000 },
   { name: 'timato', points: 3009 },
   { name: 'KM', points: 1846 },
   { name: 'josh', points: 1677 },
@@ -133,6 +134,7 @@ export const top75 = [
   { name: 'hardcode', points: 422 },
   { name: 'achoito', points: 420 },
   { name: 'Mclilzee', points: 415 },
+  { name: 'Mclilzee', points: 400000 },
   { name: 'north korean supermarket', points: 414 },
   { name: 'ris', points: 406 },
   { name: 'cauri', points: 405 },
